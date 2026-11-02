@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>WellBoss — Gestão para Wellness</title>
+  <meta name="description" content="Organize sua rotina, acompanhe seus clientes e tenha mais clareza sobre os resultados do seu negócio wellness. Teste por 7 dias, sem cartão." />
+  <meta name="theme-color" content="#F5F1E9" />
+  <link rel="canonical" href="https://wellboss.com.br/" />
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <!-- Compartilhamento (WhatsApp, Instagram, LinkedIn) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="pt_BR" />
+  <meta property="og:title" content="WellBoss — Gestão para Wellness" />
+  <meta property="og:description" content="Sua rotina, seus clientes e os números do seu negócio em uma visão integrada. 7 dias grátis, sem cartão." />
+  <meta property="og:url" content="https://wellboss.com.br/" />
+  <meta property="og:image" content="https://wellboss.com.br/assets/logo-floresta.png" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!--
+    Landing page de venda da WellBoss. Site estático, fora do app (Base44).
+    Base: "WellBoss_Landing_Page_Estrutura_e_Textos.docx" (02/11/2026).
+    Todo CTA leva ao cadastro do app: https://app.wellboss.com.br/register
+    (se o endereço mudar, troque em todos os href="https://app.wellboss.com.br/...").
+  -->
+  <style>
+    :root {
+      /* Paleta WellBoss (docs/10) */
+      --floresta: #01241D;
+      --natural: #326C52;
+      --natural-hover: #2B5D47;
+      --suave: #B4BF95;
+      --marfim: #F5F1E9;
+      --areia: #D7D0C2;
+      --grafite: #222726;
+
+      --bg: var(--marfim);
+      --card: #FFFFFF;
+      --faixa: #EDE7DB;          /* Marfim um tom abaixo, para alternar seções */
+      --texto: var(--grafite);
+      --texto-2: #5A615E;        /* 6,0:1 sobre Marfim */
+      --texto-3: #646B68;
+      --borda: var(--areia);
+
+      --raio: 12px;
+      --largura: 1120px;
+      color-scheme: light;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--texto);
+      font-family: 'Manrope', ui-sans-serif, system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+    a { color: inherit; }
+    h1, h2, h3 { margin: 0; letter-spacing: -0.02em; text-wrap: balance; }
+    p { margin: 0; }
+    ul, ol { margin: 0; padding: 0; list-style: none; }
+    :focus-visible { outline: 2px solid var(--natural); outline-offset: 3px; border-radius: 6px; }
+
+    .container { width: 100%; max-width: var(--largura); margin: 0 auto; padding: 0 20px; }
+    .estreito { max-width: 760px; }
+    .secao { padding: 72px 0; }
+    .secao--faixa { background: var(--faixa); border-block: 1px solid var(--borda); }
+    .centro { text-align: center; }
+    .centro .lead { margin-inline: auto; }
+
+    .eyebrow { font-size: 14px; font-weight: 700; color: var(--natural); letter-spacing: 0.01em; }
+    .h2 { font-size: clamp(26px, 4vw, 38px); font-weight: 800; line-height: 1.15; }
+    .lead { margin-top: 18px; max-width: 640px; font-size: 17px; line-height: 1.7; color: var(--texto-2); }
+
+    /* Botões */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 52px; padding: 0 26px; border-radius: 10px;
+      font: inherit; font-size: 16px; font-weight: 700; text-decoration: none;
+      transition: background-color .15s, border-color .15s;
+      white-space: nowrap;
+    }
+    .btn svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .btn--primario { background: var(--natural); color: var(--marfim); }
+    .btn--primario:hover { background: var(--natural-hover); }
+    .btn--contorno { border: 1.5px solid #8A918D; color: var(--texto); background: transparent; }
+    .btn--contorno:hover { background: var(--card); }
+    .btn--sm { min-height: 40px; padding: 0 16px; font-size: 14px; }
+    .btn--suave { background: var(--suave); color: var(--floresta); }
+    .btn--suave:hover { background: #C3CCA8; }
+    .micro { margin-top: 12px; font-size: 14px; color: var(--texto-3); }
+
+    /* Cabeçalho */
+    .topo {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(245, 241, 233, 0.92);
+      backdrop-filter: saturate(140%) blur(8px);
+      -webkit-backdrop-filter: saturate(140%) blur(8px);
+      border-bottom: 1px solid var(--borda);
+      padding-top: env(safe-area-inset-top, 0px);
+    }
+    .topo__linha { display: flex; align-items: center; gap: 24px; height: 68px; }
+    .topo__logo img { height: 26px; width: auto; }
+    .topo__nav { display: none; gap: 28px; font-size: 15px; font-weight: 600; color: var(--texto-2); }
+    .topo__nav a { text-decoration: none; }
+    .topo__nav a:hover { color: var(--texto); }
+    .topo__acoes { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+    .topo__entrar { padding: 8px 12px; font-size: 15px; font-weight: 600; color: var(--texto-2); text-decoration: none; border-radius: 8px; }
+    .topo__entrar:hover { color: var(--texto); background: var(--faixa); }
+    .topo__cta { display: none; }
+
+    /* Hero */
+    .hero { padding: 48px 0 72px; }
+    .hero__grade { display: grid; gap: 48px; align-items: center; }
+    .hero h1 { margin-top: 16px; font-size: clamp(34px, 6vw, 54px); font-weight: 800; line-height: 1.08; }
+    .hero .lead { font-size: 18px; }
+    .hero__ctas { margin-top: 32px; display: flex; flex-direction: column; gap: 12px; }
+
+    /* Moldura de navegador com a captura do sistema */
+    .moldura { border: 1.5px solid var(--borda); border-radius: var(--raio); background: var(--card); overflow: hidden; }
+    .moldura--destaque { box-shadow: 0 24px 48px -16px rgba(1, 36, 29, 0.18); }
+    .moldura__barra { display: flex; align-items: center; gap: 6px; padding: 9px 12px; background: var(--faixa); border-bottom: 1px solid var(--borda); }
+    .moldura__barra i { width: 10px; height: 10px; border-radius: 50%; background: #C9C1B1; }
+    .moldura__barra span { margin-left: 10px; padding: 1px 10px; border-radius: 6px; background: var(--bg); font-size: 12px; font-weight: 700; color: var(--texto-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .moldura__tela { position: relative; aspect-ratio: 16 / 10; background: var(--bg); }
+    .moldura__tela img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+    /* Esqueleto neutro: aparece só enquanto a captura real não existe */
+    .esqueleto { position: absolute; inset: 0; display: flex; }
+    .esqueleto__menu { width: 20%; background: var(--floresta); padding: 14px 10px; display: flex; flex-direction: column; gap: 9px; }
+    .esqueleto__menu b { height: 7px; border-radius: 9px; background: rgba(245, 241, 233, 0.18); }
+    .esqueleto__menu b:nth-child(2) { background: rgba(180, 191, 149, 0.55); }
+    .esqueleto__corpo { flex: 1; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+    .esqueleto__titulo { height: 11px; width: 38%; border-radius: 9px; background: var(--areia); }
+    .esqueleto__cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .esqueleto__cards b, .esqueleto__painel { border: 1px solid var(--borda); border-radius: 8px; background: var(--card); }
+    .esqueleto__cards b { height: 46px; }
+    .esqueleto__painel { flex: 1; }
+
+    /* Dor: peças espalhadas → conectadas */
+    .dor__grade { display: grid; gap: 40px; align-items: center; }
+    .dor__fecho { margin-top: 22px; font-size: 19px; font-weight: 800; }
+    .mapa { display: grid; gap: 14px; }
+    .mapa__quadro { position: relative; height: 220px; border-radius: var(--raio); }
+    .mapa__quadro--solto { border: 1.5px dashed #BFB7A6; background: var(--bg); }
+    .mapa__quadro--ligado { border: 1.5px solid var(--borda); background: var(--card); display: flex; align-items: center; justify-content: center; }
+    .mapa__rotulo { position: absolute; top: 10px; left: 12px; font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--texto-3); }
+    .peca { position: absolute; padding: 6px 12px; border: 1px solid var(--borda); border-radius: 8px; background: var(--card); font-size: 13px; font-weight: 700; color: var(--texto-2); }
+    .peca:nth-of-type(1) { left: 6%; top: 26%; transform: rotate(-6deg); }
+    .peca:nth-of-type(2) { right: 7%; top: 18%; transform: rotate(4deg); }
+    .peca:nth-of-type(3) { left: 34%; top: 50%; transform: rotate(2deg); }
+    .peca:nth-of-type(4) { left: 5%; bottom: 9%; transform: rotate(4deg); }
+    .peca:nth-of-type(5) { right: 6%; bottom: 13%; transform: rotate(-4deg); }
+    .ligado__linhas { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .ligado__grade { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 54px 84px; }
+    .ligado__grade span { padding: 6px 12px; border: 1px solid rgba(50, 108, 82, 0.35); border-radius: 8px; background: var(--card); font-size: 13px; font-weight: 700; text-align: center; }
+    .ligado__centro { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); padding: 9px 12px; border: 1.5px solid rgba(50, 108, 82, 0.45); border-radius: 999px; background: var(--bg); }
+    .ligado__centro img { height: 20px; width: auto; }
+
+    /* Cartões */
+    .cards { margin-top: 48px; display: grid; gap: 16px; }
+    .card { padding: 26px; border: 1.5px solid var(--borda); border-radius: var(--raio); background: var(--card); }
+    .card__icone { display: inline-flex; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: 10px; background: rgba(50, 108, 82, 0.1); color: var(--natural); }
+    .card__icone svg { width: 22px; height: 22px; }
+    .card h3 { margin-top: 18px; font-size: 18px; font-weight: 800; }
+    .card p { margin-top: 8px; font-size: 15px; line-height: 1.65; color: var(--texto-2); }
+
+    /* Produto por dentro */
+    .telas { margin-top: 48px; display: grid; gap: 32px; }
+    .telas figure { margin: 0; }
+    .telas figcaption { margin-top: 14px; font-size: 15px; font-weight: 700; }
+    .acao { margin-top: 48px; display: flex; justify-content: center; }
+
+    /* Transformação */
+    .destaque { margin-top: 40px; font-size: clamp(24px, 3.6vw, 34px); font-weight: 800; line-height: 1.25; color: var(--natural); }
+    .destaque span { display: block; }
+
+    /* Para quem é */
+    .quem__grade { display: grid; gap: 40px; }
+    .perfis { display: grid; gap: 12px; }
+    .perfis li { display: flex; gap: 14px; padding: 20px; border: 1.5px solid var(--borda); border-radius: var(--raio); background: var(--card); font-size: 16px; font-weight: 600; line-height: 1.55; }
+    .perfis svg { width: 22px; height: 22px; flex-shrink: 0; margin-top: 1px; color: var(--natural); }
+
+    /* Como começar */
+    .passo__num { display: inline-flex; width: 36px; height: 36px; align-items: center; justify-content: center; border-radius: 50%; background: var(--natural); color: var(--marfim); font-weight: 800; font-variant-numeric: tabular-nums; }
+
+    /* FAQ */
+    .faq { margin-top: 32px; border-top: 1px solid var(--borda); }
+    .faq details { border-bottom: 1px solid var(--borda); }
+    .faq summary {
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 22px 0; cursor: pointer; list-style: none;
+      font-size: 17px; font-weight: 800;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: ''; flex-shrink: 0; width: 10px; height: 10px; margin-right: 4px;
+      border-right: 2px solid var(--texto-3); border-bottom: 2px solid var(--texto-3);
+      transform: rotate(45deg) translateY(-3px); transition: transform .2s;
+    }
+    .faq details[open] summary::after { transform: rotate(-135deg) translateY(-3px); }
+    .faq details p { padding: 0 0 22px; font-size: 16px; line-height: 1.7; color: var(--texto-2); }
+    .faq details a { color: var(--natural); font-weight: 700; }
+
+    /* CTA final (Floresta) */
+    .final { padding: 88px 0; background: var(--floresta); color: var(--marfim); }
+    .final .lead { color: var(--areia); }
+    .final .micro { color: #B9C2B0; }
+    .final :focus-visible { outline-color: var(--suave); }
+
+    /* Rodapé */
+    .rodape { padding: 40px 0 48px; border-top: 1px solid var(--borda); }
+    .rodape__linha { display: flex; flex-direction: column; gap: 24px; }
+    .rodape__logo { height: 34px; width: auto; }
+    .rodape__assina { margin-top: 12px; font-size: 14px; color: var(--texto-3); }
+    .rodape nav { display: flex; flex-wrap: wrap; gap: 8px 24px; font-size: 14px; font-weight: 600; color: var(--texto-2); }
+    .rodape nav a { text-decoration: none; }
+    .rodape nav a:hover { color: var(--texto); text-decoration: underline; }
+
+    /* Barra fixa de CTA no celular */
+    .barra {
+      position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+      padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px));
+      background: rgba(245, 241, 233, 0.96); border-top: 1px solid var(--borda);
+      transform: translateY(110%); transition: transform .25s ease;
+    }
+    .barra.visivel { transform: translateY(0); }
+    .barra .btn { width: 100%; min-height: 48px; }
+    .barra p { margin-top: 6px; text-align: center; font-size: 12px; color: var(--texto-3); }
+    body { padding-bottom: 96px; }
+
+    @media (min-width: 640px) {
+      .container { padding: 0 32px; }
+      .hero__ctas { flex-direction: row; }
+      .topo__cta { display: inline-flex; }
+      .mapa { grid-template-columns: 1fr 1fr; }
+      .cards--2 { grid-template-columns: 1fr 1fr; }
+      .cards--3 { grid-template-columns: repeat(3, 1fr); }
+      .rodape__linha { flex-direction: row; align-items: center; justify-content: space-between; }
+    }
+    @media (min-width: 768px) {
+      body { padding-bottom: 0; }
+      .barra { display: none; }
+      .secao { padding: 104px 0; }
+      .hero { padding: 80px 0 104px; }
+    }
+    @media (min-width: 1024px) {
+      .topo__nav { display: flex; margin-left: 16px; }
+      .hero__grade { grid-template-columns: 1fr 1.15fr; }
+      .dor__grade, .quem__grade { grid-template-columns: 1fr 1fr; }
+      .cards--4 { grid-template-columns: repeat(4, 1fr); }
+      .telas { grid-template-columns: repeat(3, 1fr); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: 0.01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Ícones (lucide, traço 2) -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-seta" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-agenda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/><path d="m9 16 2 2 4-4"/></symbol>
+      <symbol id="i-clientes" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+      <symbol id="i-financeiro" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 7V4a1 1 0 0 0-1-1H5a2 2 0 0 0 0 4h15a1 1 0 0 1 1 1v4h-3a2 2 0 0 0 0 4h3a1 1 0 0 0 1-1v-2a1 1 0 0 0-1-1"/><path d="M3 5v14a2 2 0 0 0 2 2h15a1 1 0 0 0 1-1v-4"/></symbol>
+      <symbol id="i-indicadores" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></symbol>
+    </defs>
+  </svg>
+
+  <header class="topo">
+    <div class="container topo__linha">
+      <a class="topo__logo" href="#topo" aria-label="WellBoss, início">
+        <img src="assets/logo-claro-simples.png" alt="WellBoss" width="136" height="26" />
+      </a>
+      <nav class="topo__nav" aria-label="Seções">
+        <a href="#como-funciona">Como funciona</a>
+        <a href="#para-quem">Para quem é</a>
+        <a href="#perguntas">Perguntas</a>
+      </nav>
+      <div class="topo__acoes">
+        <a class="topo__entrar" href="https://app.wellboss.com.br/login">Entrar</a>
+        <a class="btn btn--primario btn--sm topo__cta" href="https://app.wellboss.com.br/register">Começar teste grátis</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- 1. Hero -->
+    <section class="hero">
+      <div class="container hero__grade">
+        <div>
+          <p class="eyebrow">Gestão para profissionais wellness</p>
+          <h1>Seu negócio wellness merece uma gestão mais inteligente.</h1>
+          <p class="lead">Organize sua rotina, acompanhe seus clientes e tenha mais clareza sobre os resultados do seu negócio. Reúna as informações essenciais da sua operação em uma plataforma pensada para quem vive o mercado wellness.</p>
+          <div class="hero__ctas" id="cta-hero">
+            <a class="btn btn--primario" href="https://app.wellboss.com.br/register">Conheça a WellBoss <svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+            <a class="btn btn--contorno" href="#como-funciona">Veja como funciona</a>
+          </div>
+          <p class="micro">7 dias grátis, sem cartão de crédito.</p>
+        </div>
+
+        <div class="moldura moldura--destaque">
+          <div class="moldura__barra" aria-hidden="true"><i></i><i></i><i></i><span>WellBoss · Início</span></div>
+          <div class="moldura__tela">
+            <div class="esqueleto" aria-hidden="true">
+              <div class="esqueleto__menu"><b></b><b></b><b></b><b></b><b></b></div>
+              <div class="esqueleto__corpo"><b class="esqueleto__titulo"></b><div class="esqueleto__cards"><b></b><b></b><b></b></div><b class="esqueleto__painel"></b></div>
+            </div>
+            <img src="assets/telas/inicio.webp" alt="Tela Início da WellBoss, com a visão geral da operação" width="1440" height="900" onerror="this.remove()" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Dor / identificação -->
+    <section class="secao secao--faixa">
+      <div class="container dor__grade">
+        <div>
+          <h2 class="h2">Você cuida dos seus clientes. Mas administrar o negócio também faz parte da rotina.</h2>
+          <p class="lead">Entre atendimentos, mensagens, agenda, pagamentos e renovações, é fácil acabar com informações espalhadas por diferentes ferramentas. Quando cada parte do negócio fica em um lugar, acompanhar tudo e entender o que precisa de atenção pode dar mais trabalho do que deveria.</p>
+          <p class="dor__fecho">Sua gestão não deveria ser mais uma fonte de complicação.</p>
+        </div>
+        <div class="mapa" aria-hidden="true">
+          <div class="mapa__quadro mapa__quadro--solto">
+            <span class="mapa__rotulo">Hoje</span>
+            <span class="peca">Agenda</span><span class="peca">Clientes</span><span class="peca">Pagamentos</span><span class="peca">Renovações</span><span class="peca">Mensagens</span>
+          </div>
+          <div class="mapa__quadro mapa__quadro--ligado">
+            <span class="mapa__rotulo">Com a WellBoss</span>
+            <svg class="ligado__linhas" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M22 34 L50 52 L78 34 M22 72 L50 52 L78 72" stroke="#D7D0C2" stroke-width="0.6" fill="none" vector-effect="non-scaling-stroke"/></svg>
+            <div class="ligado__grade"><span>Agenda</span><span>Clientes</span><span>Pagamentos</span><span>Renovações</span></div>
+            <span class="ligado__centro"><img src="assets/monograma-verde.png" alt="" width="32" height="20" /></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Proposta de valor -->
+    <section class="secao">
+      <div class="container">
+        <h2 class="h2" style="max-width:680px">A gestão do seu negócio, conectada em um só lugar.</h2>
+        <p class="lead">A WellBoss foi pensada para ajudar profissionais wellness a organizar a operação e enxergar melhor as informações que apoiam as decisões do dia a dia.</p>
+        <ul class="cards cards--2 cards--4">
+          <li class="card">
+            <span class="card__icone"><svg aria-hidden="true"><use href="#i-agenda"/></svg></span>
+            <h3>Rotina e organização</h3>
+            <p>Tenha uma visão mais organizada dos compromissos e das atividades da operação.</p>
+          </li>
+          <li class="card">
+            <span class="card__icone"><svg aria-hidden="true"><use href="#i-clientes"/></svg></span>
+            <h3>Clientes e relacionamento</h3>
+            <p>Mantenha informações importantes dos clientes acessíveis e acompanhe pontos que merecem atenção.</p>
+          </li>
+          <li class="card">
+            <span class="card__icone"><svg aria-hidden="true"><use href="#i-financeiro"/></svg></span>
+            <h3>Acompanhamento financeiro</h3>
+            <p>Organize as informações financeiras para acompanhar a evolução do negócio com mais clareza.</p>
+          </li>
+          <li class="card">
+            <span class="card__icone"><svg aria-hidden="true"><use href="#i-indicadores"/></svg></span>
+            <h3>Indicadores e resultados</h3>
+            <p>Transforme dados da operação em uma visão mais clara do que está acontecendo e do que pode melhorar.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 4. Produto por dentro -->
+    <section class="secao secao--faixa" id="como-funciona">
+      <div class="container">
+        <div class="centro">
+          <h2 class="h2" style="max-width:720px;margin-inline:auto">Uma visão mais clara começa com informações mais organizadas.</h2>
+          <p class="lead">A WellBoss reúne recursos para apoiar a gestão do seu negócio wellness sem perder de vista o que importa: sua rotina, seus clientes e os resultados da operação.</p>
+        </div>
+        <div class="telas">
+          <figure>
+            <div class="moldura">
+              <div class="moldura__barra" aria-hidden="true"><i></i><i></i><i></i><span>WellBoss · Início</span></div>
+              <div class="moldura__tela">
+                <div class="esqueleto" aria-hidden="true"><div class="esqueleto__menu"><b></b><b></b><b></b><b></b><b></b></div><div class="esqueleto__corpo"><b class="esqueleto__titulo"></b><div class="esqueleto__cards"><b></b><b></b><b></b></div><b class="esqueleto__painel"></b></div></div>
+                <img src="assets/telas/inicio.webp" alt="Tela Início da WellBoss" width="1440" height="900" loading="lazy" onerror="this.remove()" />
+              </div>
+            </div>
+            <figcaption>Tenha uma visão geral da operação.</figcaption>
+          </figure>
+          <figure>
+            <div class="moldura">
+              <div class="moldura__barra" aria-hidden="true"><i></i><i></i><i></i><span>WellBoss · Clientes</span></div>
+              <div class="moldura__tela">
+                <div class="esqueleto" aria-hidden="true"><div class="esqueleto__menu"><b></b><b></b><b></b><b></b><b></b></div><div class="esqueleto__corpo"><b class="esqueleto__titulo"></b><div class="esqueleto__cards"><b></b><b></b><b></b></div><b class="esqueleto__painel"></b></div></div>
+                <img src="assets/telas/clientes.webp" alt="Tela Clientes da WellBoss" width="1440" height="900" loading="lazy" onerror="this.remove()" />
+              </div>
+            </div>
+            <figcaption>Organize informações importantes da rotina e dos clientes.</figcaption>
+          </figure>
+          <figure>
+            <div class="moldura">
+              <div class="moldura__barra" aria-hidden="true"><i></i><i></i><i></i><span>WellBoss · Indicadores</span></div>
+              <div class="moldura__tela">
+                <div class="esqueleto" aria-hidden="true"><div class="esqueleto__menu"><b></b><b></b><b></b><b></b><b></b></div><div class="esqueleto__corpo"><b class="esqueleto__titulo"></b><div class="esqueleto__cards"><b></b><b></b><b></b></div><b class="esqueleto__painel"></b></div></div>
+                <img src="assets/telas/indicadores.webp" alt="Tela Indicadores da WellBoss" width="1440" height="900" loading="lazy" onerror="this.remove()" />
+              </div>
+            </div>
+            <figcaption>Acompanhe os dados que ajudam você a decidir os próximos passos.</figcaption>
+          </figure>
+        </div>
+        <div class="acao">
+          <a class="btn btn--primario" href="https://app.wellboss.com.br/register">Quero conhecer a WellBoss <svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Transformação -->
+    <section class="secao">
+      <div class="container estreito centro">
+        <h2 class="h2">Menos tempo tentando juntar informações. Mais clareza para gerir.</h2>
+        <p class="lead">Quando você consegue visualizar melhor a rotina, os clientes e os números do negócio, fica mais fácil identificar prioridades e tomar decisões com intenção. A WellBoss quer ajudar você a sair de uma gestão fragmentada para uma operação mais organizada e consciente.</p>
+        <p class="destaque"><span>Mais clareza para gerir.</span><span>Mais agilidade para agir.</span></p>
+      </div>
+    </section>
+
+    <!-- 6. Para quem é -->
+    <section class="secao secao--faixa" id="para-quem">
+      <div class="container quem__grade">
+        <div>
+          <h2 class="h2">Feita para quem leva o próprio negócio wellness a sério.</h2>
+          <p class="lead">A WellBoss é para profissionais que querem profissionalizar a gestão sem deixar que a administração tome o lugar do trabalho que fazem com seus clientes.</p>
+        </div>
+        <ul class="perfis">
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Personal trainers autônomos que gerenciam a própria carteira de clientes.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Profissionais wellness que precisam organizar melhor a rotina e as informações.</li>
+          <li><svg aria-hidden="true"><use href="#i-check"/></svg>Gestores de pequenos negócios wellness que buscam uma visão mais integrada da operação.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 7. Como começar -->
+    <section class="secao">
+      <div class="container">
+        <h2 class="h2" style="max-width:680px">Comece a organizar melhor a gestão do seu negócio.</h2>
+        <p class="lead">Conheça a WellBoss e descubra como a plataforma pode se encaixar na rotina do seu negócio wellness.</p>
+        <ol class="cards cards--3">
+          <li class="card">
+            <span class="passo__num">1</span>
+            <h3>Crie sua conta</h3>
+            <p>Cadastro com e-mail ou Google, em poucos minutos.</p>
+          </li>
+          <li class="card">
+            <span class="passo__num">2</span>
+            <h3>Configure o básico</h3>
+            <p>Um passo a passo guiado ajuda a montar a sua operação.</p>
+          </li>
+          <li class="card">
+            <span class="passo__num">3</span>
+            <h3>Use por 7 dias</h3>
+            <p>Sem cartão. Depois do teste, você decide se quer assinar.</p>
+          </li>
+        </ol>
+        <div style="margin-top:40px">
+          <a class="btn btn--primario" href="https://app.wellboss.com.br/register">Começar meus 7 dias grátis <svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. Perguntas frequentes -->
+    <section class="secao" id="perguntas" style="border-top:1px solid var(--borda)">
+      <div class="container estreito">
+        <h2 class="h2">Perguntas frequentes</h2>
+        <div class="faq">
+          <details>
+            <summary>O que é a WellBoss?</summary>
+            <p>A WellBoss é uma plataforma de gestão para profissionais wellness, criada para ajudar a organizar informações importantes do negócio e apoiar decisões com mais clareza.</p>
+          </details>
+          <details>
+            <summary>Para quem a WellBoss foi criada?</summary>
+            <p>O foco inicial são profissionais wellness autônomos, especialmente personal trainers que gerenciam a própria operação. A proposta pode atender outros perfis do setor conforme os recursos disponíveis.</p>
+          </details>
+          <details>
+            <summary>A WellBoss substitui todas as ferramentas que eu uso?</summary>
+            <p>A proposta é reduzir a fragmentação da gestão e reunir informações importantes em uma visão mais integrada.</p>
+          </details>
+          <details>
+            <summary>Como posso começar?</summary>
+            <p>Faça seu cadastro nesta página e use a WellBoss por 7 dias, sem cartão de crédito. Depois do teste, a assinatura custa R$&nbsp;97 por mês ou R$&nbsp;970 por ano.</p>
+          </details>
+          <details>
+            <summary>Preciso ter um estúdio ou academia?</summary>
+            <p>Não. A WellBoss é uma ferramenta para apoiar a gestão do profissional liberal.</p>
+          </details>
+          <details>
+            <summary>Os dados dos meus clientes ficam com quem?</summary>
+            <p>Com você. Você é o responsável pelos dados dos seus clientes, e a WellBoss os trata apenas para operar a plataforma. Os detalhes estão na <a href="https://app.wellboss.com.br/privacidade">Política de Privacidade</a>.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. CTA final -->
+    <section class="final">
+      <div class="container estreito centro">
+        <h2 class="h2">Seu negócio pode ser mais organizado. Sua gestão também.</h2>
+        <p class="lead">Tenha uma visão mais integrada da sua rotina, dos seus clientes e das informações que ajudam você a tomar decisões melhores.</p>
+        <div style="margin-top:40px">
+          <a class="btn btn--suave" href="https://app.wellboss.com.br/register">Conheça a WellBoss <svg aria-hidden="true"><use href="#i-seta"/></svg></a>
+        </div>
+        <p class="micro">7 dias grátis, sem cartão de crédito.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="rodape">
+    <div class="container rodape__linha">
+      <div>
+        <img class="rodape__logo" src="assets/logo-claro.png" alt="WellBoss" width="178" height="34" />
+        <p class="rodape__assina">WellBoss. Gestão para Wellness.</p>
+      </div>
+      <nav aria-label="Rodapé">
+        <a href="https://app.wellboss.com.br/privacidade">Política de Privacidade</a>
+        <a href="https://app.wellboss.com.br/login">Entrar</a>
+      </nav>
+    </div>
+  </footer>
+
+  <!-- Barra fixa no celular: aparece quando o CTA do topo sai da tela -->
+  <div class="barra" id="barra" aria-hidden="true">
+    <a class="btn btn--primario" href="https://app.wellboss.com.br/register" tabindex="-1">Começar teste grátis</a>
+    <p>7 dias, sem cartão</p>
+  </div>
+
+  <script>
+    (function () {
+      var alvo = document.getElementById('cta-hero');
+      var barra = document.getElementById('barra');
+      var link = barra.querySelector('a');
+      if (!alvo || !('IntersectionObserver' in window)) return;
+      new IntersectionObserver(function (e) {
+        var mostrar = !e[0].isIntersecting && e[0].boundingClientRect.top < 0;
+        barra.classList.toggle('visivel', mostrar);
+        barra.setAttribute('aria-hidden', String(!mostrar));
+        link.tabIndex = mostrar ? 0 : -1;
+      }).observe(alvo);
+
+      // Leva os parâmetros de campanha (utm_*) do anúncio até o cadastro.
+      var utm = new URLSearchParams(location.search);
+      var repassar = new URLSearchParams();
+      utm.forEach(function (v, k) { if (k.indexOf('utm_') === 0) repassar.set(k, v); });
+      if ([...repassar].length) {
+        document.querySelectorAll('a[href^="https://app.wellboss.com.br/register"]').forEach(function (a) {
+          a.href = a.href.split('?')[0] + '?' + repassar.toString();
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
