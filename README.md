@@ -14,18 +14,21 @@ Um arquivo (`index.html`) + `assets/`. Não tem build, não tem dependência.
 - Todo CTA leva ao cadastro do app: `https://app.wellboss.com.br/register`. Se o endereço mudar, troque em todos os `href` que começam com `https://app.wellboss.com.br`.
 - Parâmetros `utm_*` da URL da landing são repassados ao link de cadastro.
 
-## Publicar (Hostinger)
+## Publicar (Base44, app separado)
 
-Hospedagem: Hostinger, site `wellboss.com.br`, pasta `public_html`.
+O site roda no Base44, num app **separado** do app da WellBoss:
 
-1. hPanel → Sites → wellboss.com.br → **Avançado → Git**.
-2. Repositório `https://github.com/luizfernando-sc/wellboss-site.git`, branch `main`, diretório vazio (vai direto em `public_html`).
-3. Repositório privado: copie a chave SSH que o hPanel mostra e cadastre em GitHub → repositório → Settings → Deploy keys (só leitura). Nesse caso use a URL `git@github.com:luizfernando-sc/wellboss-site.git`.
-4. Clique em **Deploy**. Para atualizar depois: commit na `main` e Deploy de novo (ou ative o deploy automático com o webhook que o hPanel gera).
+- App: **WellBoss Site** (`6aea5fab1d59da037d4f0bdb`), endereço interno `https://well-boss-site-7d4f0bdb.base44.app`.
+- Domínio `wellboss.com.br` vinculado a esse app. DNS fica no Registro.br, sem trocar nameservers:
 
-### Domínio: não derrubar o app
+| Tipo | Nome | Valor |
+|---|---|---|
+| A | `wellboss.com.br` (raiz) | `216.24.57.1` |
+| CNAME | `www` | `base44.onrender.com` |
+| (o que já existe) | `app` | **não mexer**: é o app da WellBoss |
 
-`app.wellboss.com.br` aponta para o Base44. Se os nameservers do domínio forem trocados para os da Hostinger, **recrie o registro DNS do `app` antes** (mesmo tipo e valor que está hoje no provedor atual), senão o app sai do ar. Anote o registro atual antes de mexer.
+No Base44 o `index.html` fica na raiz do app e as imagens em `public/assets/` (caminhos começam com `/assets/`).
+O `.htaccess` deste repositório só vale para hospedagem Apache (Hostinger); no Base44 ele é ignorado.
 
 ## Capturas de tela (pendente)
 
