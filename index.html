@@ -322,9 +322,19 @@
     .celular::before { content: ''; position: absolute; top: 12px; left: 50%; width: 30%; height: 5px; margin-left: -15%; border-radius: 9px; background: #000; z-index: 1; }
     .celular video { display: block; width: 100%; height: auto; aspect-ratio: 300 / 620; border-radius: 23px; background: #181C1B; object-fit: cover; }
     @keyframes boia-cel { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
-    .hero { padding-bottom: 104px; }
 
     @media (max-width: 639px) { .selo { display: none; } .celular { right: -6px; bottom: -36px; width: 36%; min-width: 0; border-radius: 22px; padding: 5px; } .celular video { border-radius: 18px; } }
+    .hero__visual--cel { display: flex; justify-content: center; align-items: center; min-height: 600px; }
+    .halo { position: absolute; width: 440px; height: 440px; border-radius: 50%; background: radial-gradient(circle, rgba(50,108,82,.22), rgba(180,191,149,.18) 45%, rgba(180,191,149,0) 70%); }
+    .cel-wrap { position: relative; transform: rotateX(var(--tilt, 0deg)); transform-origin: 50% 100%; transition: transform .15s linear; }
+    .celular--hero { position: relative; right: auto; bottom: auto; width: 290px; min-width: 0; max-width: none; padding: 26px 10px 12px; border-radius: 46px; }
+    .celular--hero::before { top: 10px; height: 7px; width: 22%; margin-left: -11%; background: #2A2F2D; }
+    .celular--hero video { cursor: pointer; }
+    .celular--hero video { border-radius: 37px; aspect-ratio: 768 / 1588; }
+    .hero__visual--cel .selo--1 { left: 0; bottom: 20%; }
+    .hero__visual--cel .selo--2 { right: 0; left: auto; top: 14%; }
+    .hero__visual--cel .selo--3 { right: 4%; bottom: 6%; animation-delay: -1.5s; }
+    @media (max-width: 639px) { .hero__visual--cel { min-height: 0; padding: 8px 0 24px; } .celular--hero { width: 230px; border-radius: 38px; padding: 22px 8px 10px; } .celular--hero::before { top: 8px; } .celular--hero video { border-radius: 31px; } .halo { width: 320px; height: 320px; } }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
@@ -377,23 +387,17 @@
           <p class="micro">7 dias grátis, sem cartão de crédito.</p>
         </div>
 
-        <div class="hero__visual">
+        <div class="hero__visual hero__visual--cel">
+          <span class="halo" aria-hidden="true"></span>
           <span class="selo selo--1" aria-hidden="true"><svg><use href="#i-check"/></svg>Lembrete de aula pelo WhatsApp</span>
           <span class="selo selo--2" aria-hidden="true"><i></i>Alerta de cliente em risco</span>
-          <div class="moldura moldura--destaque">
-          <div class="moldura__barra" aria-hidden="true"><i></i><i></i><i></i><span>WellBoss · Início</span></div>
-          <div class="moldura__tela">
-            <div class="esqueleto" aria-hidden="true">
-              <div class="esqueleto__menu"><b></b><b></b><b></b><b></b><b></b></div>
-              <div class="esqueleto__corpo"><b class="esqueleto__titulo"></b><div class="esqueleto__cards"><b></b><b></b><b></b></div><b class="esqueleto__painel"></b></div>
+          <span class="selo selo--3" aria-hidden="true"><svg><use href="#i-financeiro"/></svg>Cobrança em um toque</span>
+          <div class="cel-wrap">
+            <div class="celular celular--hero">
+              <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/app-poster.webp" aria-label="Gravação do app da WellBoss no celular: clientes, tarefas com mensagem pronta no WhatsApp, financeiro e resultados" width="768" height="1588">
+                <source src="/assets/video/app.mp4" type="video/mp4" />
+              </video>
             </div>
-            <img src="/assets/telas/inicio.webp" alt="Tela Início da WellBoss, com a visão geral da operação" width="1200" height="718" fetchpriority="high" onerror="this.remove()" />
-          </div>
-          </div>
-          <div class="celular">
-            <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/app-poster.webp" aria-label="Gravação do app da WellBoss no celular: clientes, tarefas com mensagem pronta no WhatsApp, financeiro e resultados" width="300" height="620">
-              <source src="/assets/video/app.mp4" type="video/mp4" />
-            </video>
           </div>
         </div>
       </div>
@@ -620,6 +624,7 @@
       var v = document.querySelector('.celular video');
       if (!v) return;
       if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); return; }
+      v.addEventListener('click', function () { v.paused ? v.play() : v.pause(); });
       if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? v.play().catch(function () {}) : v.pause(); }).observe(v);
     })();
 
@@ -654,14 +659,14 @@
         om.observe(mapa);
       }
 
-      var tela = document.querySelector('.moldura--destaque');
+      var tela = document.querySelector('.cel-wrap');
       if (tela) {
         var pend = false;
         var aplica = function () {
           pend = false;
           var r = tela.getBoundingClientRect();
           var p = Math.max(0, Math.min(1, r.top / window.innerHeight));
-          tela.style.setProperty('--tilt', (p * 16).toFixed(2) + 'deg');
+          tela.style.setProperty('--tilt', (p * 10).toFixed(2) + 'deg');
         };
         window.addEventListener('scroll', function () { if (!pend) { pend = true; requestAnimationFrame(aplica); } }, { passive: true });
         aplica();
