@@ -281,7 +281,7 @@
     .selo svg { width: 16px; height: 16px; color: var(--natural); }
     .selo i { width: 8px; height: 8px; border-radius: 50%; background: #C2352F; animation: pulso 2s ease-out infinite; }
     .selo--1 { left: -18px; bottom: 16%; }
-    .selo--2 { right: -12px; top: 16%; animation-delay: -3s; }
+    .selo--2 { left: 34%; top: -20px; animation-delay: -3s; }
     @keyframes boia { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
     @keyframes pulso { 0% { box-shadow: 0 0 0 0 rgba(194,53,47,.55); } 70%, 100% { box-shadow: 0 0 0 9px rgba(194,53,47,0); } }
 
@@ -317,7 +317,14 @@
     .final::before { content: ''; position: absolute; width: 760px; height: 760px; left: 50%; top: 50%; margin: -380px 0 0 -380px; border-radius: 50%; background: radial-gradient(circle, rgba(180,191,149,.22), rgba(180,191,149,0) 62%); animation: flutua 16s ease-in-out infinite alternate; pointer-events: none; }
     .final > .container { position: relative; }
 
-    @media (max-width: 639px) { .selo { display: none; } }
+    /* Celular com gravação real do app, sobreposto à tela do computador */
+    .celular { position: absolute; z-index: 3; right: -26px; bottom: -48px; width: 31%; min-width: 150px; max-width: 210px; padding: 7px; border-radius: 30px; background: #0E1110; box-shadow: 0 28px 50px -18px rgba(1,36,29,.45), 0 0 0 1px rgba(255,255,255,.06) inset; animation: boia-cel 7s ease-in-out infinite; }
+    .celular::before { content: ''; position: absolute; top: 12px; left: 50%; width: 30%; height: 5px; margin-left: -15%; border-radius: 9px; background: #000; z-index: 1; }
+    .celular video { display: block; width: 100%; height: auto; aspect-ratio: 300 / 620; border-radius: 23px; background: #181C1B; object-fit: cover; }
+    @keyframes boia-cel { 0%, 100% { transform: translateY(0) rotate(2deg); } 50% { transform: translateY(-10px) rotate(2deg); } }
+    .hero { padding-bottom: 104px; }
+
+    @media (max-width: 639px) { .selo { display: none; } .celular { right: -6px; bottom: -36px; width: 36%; min-width: 0; border-radius: 22px; padding: 5px; } .celular video { border-radius: 18px; } }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
@@ -382,6 +389,11 @@
             </div>
             <img src="/assets/telas/inicio.webp" alt="Tela Início da WellBoss, com a visão geral da operação" width="1200" height="718" fetchpriority="high" onerror="this.remove()" />
           </div>
+          </div>
+          <div class="celular">
+            <video autoplay muted loop playsinline preload="metadata" poster="/assets/video/app-poster.webp" aria-label="Gravação do app da WellBoss no celular: clientes, tarefas com mensagem pronta no WhatsApp, financeiro e resultados" width="300" height="620">
+              <source src="/assets/video/app.mp4" type="video/mp4" />
+            </video>
           </div>
         </div>
       </div>
@@ -603,6 +615,14 @@
   </div>
 
   <script>
+    // Vídeo do celular: parado para quem pede menos movimento; pausa fora da tela.
+    (function () {
+      var v = document.querySelector('.celular video');
+      if (!v) return;
+      if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) { v.removeAttribute('autoplay'); v.pause(); return; }
+      if ('IntersectionObserver' in window) new IntersectionObserver(function (e) { e[0].isIntersecting ? v.play().catch(function () {}) : v.pause(); }).observe(v);
+    })();
+
     // Movimento: revela os blocos ao rolar, conecta o mapa e inclina a tela do topo.
     (function () {
       var reduz = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
